@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ProjectRoleDTO {
-    int id;
-    String name;
-    String description;
+    private int id;
+    private String name;
+    private String description;
 }

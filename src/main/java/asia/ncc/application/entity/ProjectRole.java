@@ -12,10 +12,10 @@ public class ProjectRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "project_role_id")
-    int id;
-    String name;
-    String description;
+    private int id;
+    private String name;
+    private String description;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "projectRole")
     @ToString.Exclude
-    List<ProjectAssignment> assignments;
+    private List<ProjectAssignment> assignments;
 }

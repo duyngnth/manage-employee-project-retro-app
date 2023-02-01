@@ -13,11 +13,11 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "project_id")
-    int id;
-    String name;
-    String description;
-    int status;
+    private int id;
+    private String name;
+    private String description;
+    private int status;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
     @ToString.Exclude
-    List<ProjectAssignment> assignments;
+    private List<ProjectAssignment> assignments;
 }

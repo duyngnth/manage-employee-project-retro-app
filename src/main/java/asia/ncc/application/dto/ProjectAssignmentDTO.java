@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class ProjectAssignmentDTO {
-    int id;
-    String employeeFullname;
-    String projectName;
-    String projectRoleName;
+    private int id;
+    private String employeeFullname;
+    private String projectName;
+    private String projectRoleName;
 }

@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class ProjectDTO {
-    int id;
-    String name;
-    String description;
-    int status;
+    private int id;
+    private String name;
+    private String description;
+    private int status;
 }
