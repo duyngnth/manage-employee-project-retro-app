@@ -1,4 +1,4 @@
-package asia.ncc.manageemployeeprojectretroapp;
+package asia.ncc.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
