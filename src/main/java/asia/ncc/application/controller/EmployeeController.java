@@ -59,8 +59,9 @@ public class EmployeeController {
     }
 
     @GetMapping("employee")
-    public List<EmployeeDTO> filter() {
-        return null;
+    public List<EmployeeDTO> filter(@RequestParam(value = "projectCode", required = false) String projectCode,
+                                    @RequestParam(value = "inputName", required = false) String inputName) {
+        return employeeService.filter(projectCode, inputName);
     }
 
     @PostMapping("employee")

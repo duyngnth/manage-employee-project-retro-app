@@ -1,6 +1,5 @@
 package asia.ncc.application.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
 
@@ -20,5 +19,5 @@ public class Project {
     private int status;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
     @ToString.Exclude
-    private List<ProjectAssignment> assignments;
+    private List<Assignment> assignments;
 }

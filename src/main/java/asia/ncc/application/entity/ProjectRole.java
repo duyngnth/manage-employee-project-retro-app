@@ -17,5 +17,5 @@ public class ProjectRole {
     private String description;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "projectRole")
     @ToString.Exclude
-    private List<ProjectAssignment> assignments;
+    private List<Assignment> assignments;
 }

@@ -23,7 +23,7 @@ public class Employee {
     private String role;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     @ToString.Exclude
-    private List<ProjectAssignment> assignments;
+    private List<Assignment> assignments;
 
     public String getFullname() {
         return lastname + " " + firstname;

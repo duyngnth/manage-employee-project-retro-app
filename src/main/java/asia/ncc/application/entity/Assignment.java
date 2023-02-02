@@ -4,9 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Entity(name = "project_assignment")
+@Entity(name = "assignment")
 @Data
-public class ProjectAssignment {
+public class Assignment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "project_assignment_id")

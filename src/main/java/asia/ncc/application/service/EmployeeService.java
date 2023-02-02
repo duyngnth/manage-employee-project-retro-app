@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,7 +26,12 @@ public class EmployeeService {
     }
 
     public List<EmployeeDTO> filter(String projectCode, String inputName) {
-        return null;
+        inputName = "%" + inputName + "%";
+        List<Employee> filterResults = employeeRepository.filter(projectCode, inputName);
+        List<EmployeeDTO> employeeDTOs = new ArrayList<>();
+        for (Employee employee : filterResults)
+            employeeDTOs.add(modelMapper.map(employee, EmployeeDTO.class));
+        return employeeDTOs;
     }
 
     public EmployeeDTO save(EmployeeDTO employeeDTO) {
