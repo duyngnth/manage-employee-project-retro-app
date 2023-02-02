@@ -10,7 +10,7 @@ public class ProjectAssignment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "project_assignment_id")
-    private int id;
+    private Integer id;
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
