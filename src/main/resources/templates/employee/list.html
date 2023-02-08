@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee list</title>
+</head>
+<body>
+    <input name="inputName" type="text">
+    <button id="search_btn">Search</button>
+    <table id="employees" border="1" cellspacing="0"></table>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        async function changeStatus(username) {
+
+        }
+
+        async function getAPI(url) {
+            const response = await fetch(url);
+            var data = await response.json();
+            console.log(data);
+            show(data);
+        }
+        let url = "http://localhost:8080/employee?";
+        let inputName = /*[[${inputName}]]*/ null;
+        let projectCode = /*[[${projectCode}]]*/ null;
+        if (inputName != null)
+            url += "inputName=" + inputName;
+        if (projectCode != null)
+            url += "&projectCode=" + projectCode;
+        console.log(url);
+        getAPI(url);
+
+        function show(data) {
+            let table = `
+            <tr>
+            <th>Index</th>
+            <th>Fullname</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Branch</th>
+            <th>Status</th>
+            <th>Action</th>
+            </tr>`
+            let index = 0;
+
+            for (let r of data) {
+                index++;
+                let status;
+                if (r.status == 1)
+                    status = `<td style="color: green">Active</td>`;
+                else
+                    status = `<td style="color: red">Inactive</td>`;
+                table += `
+                <tr>
+                    <td>${index}</td>
+                    <td>${r.lastName + " " + r.firstName}</td>
+                    <td>${r.email}</td>
+                    <td>${r.phone}</td>
+                    <td>${r.branch}</td>
+                    ` + status + `
+                    <td>
+                        <button>Detail</button>
+                        <button>Deactive</button>
+                    </td>
+                </tr>`
+            }
+            document.getElementById("employees").innerHTML = table;
+        }
+        /*]]>*/
+    </script>
+</body>
+</html>

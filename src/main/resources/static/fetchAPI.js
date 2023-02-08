@@ -6,9 +6,9 @@ let data = '{\n' +
     '            "email": "nam.trinhhoai@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
-    '            "firstName": "An",\n' +
-    '            "lastName": "Nguyễn Đình",\n' +
-    '            "email": "an.nguyendinh@ncc.asia"\n' +
+    '            "firstName": "Thịnh",\n' +
+    '            "lastName": "Trần Lê Quang",\n' +
+    '            "email": "thinh.tranlequang@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
     '            "firstName": "Quân",\n' +
@@ -61,6 +61,11 @@ let data = '{\n' +
     '            "email": "huy.luuphuc@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
+    '            "firstName": "Phú",\n' +
+    '            "lastName": "Vương Sỹ Hồng",\n' +
+    '            "email": "phu.vuongsyhong@ncc.asia"\n' +
+    '        },\n' +
+    '        {\n' +
     '            "firstName": "Hưng",\n' +
     '            "lastName": "Nguyễn Tấn",\n' +
     '            "email": "hung.nguyentan@ncc.asia"\n' +
@@ -84,6 +89,16 @@ let data = '{\n' +
     '            "firstName": "Hưng",\n' +
     '            "lastName": "Lê Việt",\n' +
     '            "email": "hung.leviet1@ncc.asia"\n' +
+    '        },\n' +
+    '        {\n' +
+    '            "firstName": "Nam",\n' +
+    '            "lastName": "Nguyễn Phương",\n' +
+    '            "email": "nam.nguyenphuong@ncc.asia"\n' +
+    '        },\n' +
+    '        {\n' +
+    '            "firstName": "Lợi",\n' +
+    '            "lastName": "Mai Xuân",\n' +
+    '            "email": "loi.maixuan@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
     '            "firstName": "Ly",\n' +
@@ -174,11 +189,6 @@ let data = '{\n' +
     '            "firstName": "Sơn",\n' +
     '            "lastName": "Nguyễn Trường",\n' +
     '            "email": "son.nguyentruong1@ncc.asia"\n' +
-    '        },\n' +
-    '        {\n' +
-    '            "firstName": "Tiến",\n' +
-    '            "lastName": "Nguyễn Thành",\n' +
-    '            "email": "tien.nguyenthanh@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
     '            "firstName": "Đức",\n' +
@@ -371,11 +381,6 @@ let data = '{\n' +
     '            "email": "nhung.nguyenthi@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
-    '            "firstName": "Đạt",\n' +
-    '            "lastName": "Phan Tiến",\n' +
-    '            "email": "dat.phantien@ncc.asia"\n' +
-    '        },\n' +
-    '        {\n' +
     '            "firstName": "Hữu",\n' +
     '            "lastName": "Đào Hoàng",\n' +
     '            "email": "huu.daohoang@ncc.asia"\n' +
@@ -531,14 +536,14 @@ let data = '{\n' +
     '            "email": "giang.nguyenthihuong@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
-    '            "firstName": "Hà",\n' +
-    '            "lastName": "Nguyễn Thị",\n' +
-    '            "email": "ha.nguyenthi@ncc.asia"\n' +
-    '        },\n' +
-    '        {\n' +
     '            "firstName": "My",\n' +
     '            "lastName": "Nghiêm Thị Trà",\n' +
     '            "email": "my.nghiemthitra@ncc.asia"\n' +
+    '        },\n' +
+    '        {\n' +
+    '            "firstName": "Hà",\n' +
+    '            "lastName": "Nguyễn Thị",\n' +
+    '            "email": "ha.nguyenthi@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
     '            "firstName": "Ân",\n' +
@@ -816,16 +821,6 @@ let data = '{\n' +
     '            "email": "giang.nguyenthingan@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
-    '            "firstName": "Hưởng",\n' +
-    '            "lastName": "Đỗ Phú",\n' +
-    '            "email": "huong.dophu@ncc.asia"\n' +
-    '        },\n' +
-    '        {\n' +
-    '            "firstName": "Yến",\n' +
-    '            "lastName": "Trần Thị Kim",\n' +
-    '            "email": "yen.tranthikim@ncc.asia"\n' +
-    '        },\n' +
-    '        {\n' +
     '            "firstName": "Hương",\n' +
     '            "lastName": "Đỗ Thị",\n' +
     '            "email": "huong.dothi@ncc.asia"\n' +
@@ -896,14 +891,14 @@ let data = '{\n' +
     '            "email": "vinh.nguyenquoc3@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
-    '            "firstName": "Toàn",\n' +
-    '            "lastName": "Nguyễn Đức",\n' +
-    '            "email": "toan.nguyenduc@ncc.asia"\n' +
-    '        },\n' +
-    '        {\n' +
     '            "firstName": "Linh",\n' +
     '            "lastName": "Nguyễn Lê",\n' +
     '            "email": "linh.nguyen@ncc.asia"\n' +
+    '        },\n' +
+    '        {\n' +
+    '            "firstName": "Toàn",\n' +
+    '            "lastName": "Nguyễn Đức",\n' +
+    '            "email": "toan.nguyenduc@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
     '            "firstName": "Khánh",\n' +
@@ -944,11 +939,6 @@ let data = '{\n' +
     '            "firstName": "Nam",\n' +
     '            "lastName": "Nguyễn Văn",\n' +
     '            "email": "nam.nguyenvan@ncc.asia"\n' +
-    '        },\n' +
-    '        {\n' +
-    '            "firstName": "Đức",\n' +
-    '            "lastName": "Nguyễn Hữu",\n' +
-    '            "email": "duc.nguyenhuu@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
     '            "firstName": "Tâm",\n' +
@@ -1251,11 +1241,6 @@ let data = '{\n' +
     '            "email": "trinh.phamthidiem@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
-    '            "firstName": "Dũng",\n' +
-    '            "lastName": "Nguyễn Đình",\n' +
-    '            "email": "dung.nguyendinh1@ncc.asia"\n' +
-    '        },\n' +
-    '        {\n' +
     '            "firstName": "Hoàng",\n' +
     '            "lastName": "Nguyễn Cảnh",\n' +
     '            "email": "hoang.nguyencanh@ncc.asia"\n' +
@@ -1346,6 +1331,16 @@ let data = '{\n' +
     '            "email": "tuyen.tranvan@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
+    '            "firstName": "Hiếu",\n' +
+    '            "lastName": "Nguyễn Đình",\n' +
+    '            "email": "hieu.nguyendinh@ncc.asia"\n' +
+    '        },\n' +
+    '        {\n' +
+    '            "firstName": "Ý",\n' +
+    '            "lastName": "Lê Văn",\n' +
+    '            "email": "y.levan@ncc.asia"\n' +
+    '        },\n' +
+    '        {\n' +
     '            "firstName": "Vũ",\n' +
     '            "lastName": "Nguyễn Bằng",\n' +
     '            "email": "vu.nguyenbang@ncc.asia"\n' +
@@ -1356,19 +1351,9 @@ let data = '{\n' +
     '            "email": "xuan.vuduy@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
-    '            "firstName": "Ý",\n' +
-    '            "lastName": "Lê Văn",\n' +
-    '            "email": "y.levan@ncc.asia"\n' +
-    '        },\n' +
-    '        {\n' +
     '            "firstName": "Vũ",\n' +
     '            "lastName": "Nguyễn Trọng",\n' +
     '            "email": "vu.nguyentrong@ncc.asia"\n' +
-    '        },\n' +
-    '        {\n' +
-    '            "firstName": "Hiếu",\n' +
-    '            "lastName": "Nguyễn Đình",\n' +
-    '            "email": "hieu.nguyendinh@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
     '            "firstName": "Toàn",\n' +
@@ -1536,11 +1521,6 @@ let data = '{\n' +
     '            "email": "tin.doancong@ncc.asia"\n' +
     '        },\n' +
     '        {\n' +
-    '            "firstName": "Trung",\n' +
-    '            "lastName": "Phan Thành",\n' +
-    '            "email": "trung.phanthanh@ncc.asia"\n' +
-    '        },\n' +
-    '        {\n' +
     '            "firstName": "Tình",\n' +
     '            "lastName": "Lại Đăng",\n' +
     '            "email": "tinh.laidang@ncc.asia"\n' +
@@ -1559,11 +1539,6 @@ let data = '{\n' +
     '            "firstName": "Tin",\n' +
     '            "lastName": "Trần Anh",\n' +
     '            "email": "tin.trananh@ncc.asia"\n' +
-    '        },\n' +
-    '        {\n' +
-    '            "firstName": "Khánh",\n' +
-    '            "lastName": "Bạch Ngọc",\n' +
-    '            "email": "khanh.bachngoc@ncc.asia"\n' +
     '        }\n' +
     '    ],\n' +
     '    "targetUrl": null,\n' +
@@ -1577,7 +1552,7 @@ let parseData = JSON.parse(data)
 parseData.result.forEach(postRequest)
 
 function postRequest(item) {
-    fetch("http://localhost:8080/employee/add", {
+    fetch("http://localhost:8080/employee/fetch", {
         method: "POST",
         body: JSON.stringify(item),
         headers: {
