@@ -11,6 +11,11 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     public Employee findByUsername(String username);
+    @Query(value = "SELECT username FROM employee\n" +
+            "WHERE username = :username",
+            nativeQuery = true)
+    public String findUsername(String username);
+    public Employee findByEmail(String email);
     @Query(value = "SELECT * FROM employee \n" +
             "WHERE ((:input_name IS NULL\n" +
             "OR username LIKE :input_name\n" +
@@ -18,7 +23,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
             "OR CONCAT(lastname, ' ', firstname) LIKE :input_name))\n" +
             "AND (:project_code IS NULL\n" +
             "OR employee_id IN \n" +
-            "(SELECT employee_id FROM project_assignment \n" +
+            "(SELECT employee_id FROM assignment \n" +
             "WHERE project_id IN (SELECT project_id FROM project \n" +
             "WHERE code = :project_code)))",
             nativeQuery = true)

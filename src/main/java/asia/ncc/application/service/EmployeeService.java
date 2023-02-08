@@ -2,12 +2,15 @@ package asia.ncc.application.service;
 
 import asia.ncc.application.dto.EmployeeDTO;
 import asia.ncc.application.entity.Employee;
-import asia.ncc.application.payload.DeleteResponse;
+import asia.ncc.application.exception.EmployeeException;
+import asia.ncc.application.exception.EntityNotFoundException;
+import asia.ncc.application.payload.ApplicationResponse;
 import asia.ncc.application.repository.EmployeeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.rmi.UnexpectedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,15 +21,16 @@ public class EmployeeService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public EmployeeDTO get(String username) {
+    public EmployeeDTO get(String username) throws EntityNotFoundException {
         Employee employee = employeeRepository.findByUsername(username);
         if (employee == null)
-            return null;
+            throw new EntityNotFoundException("Employee not found");
         return modelMapper.map(employee, EmployeeDTO.class);
     }
 
     public List<EmployeeDTO> filter(String projectCode, String inputName) {
-        inputName = "%" + inputName + "%";
+        if (inputName != null)
+            inputName = "%" + inputName + "%";
         List<Employee> filterResults = employeeRepository.filter(projectCode, inputName);
         List<EmployeeDTO> employeeDTOs = new ArrayList<>();
         for (Employee employee : filterResults)
@@ -34,38 +38,47 @@ public class EmployeeService {
         return employeeDTOs;
     }
 
-    public EmployeeDTO save(EmployeeDTO employeeDTO) {
+    public EmployeeDTO add(EmployeeDTO employeeDTO) throws EmployeeException {
+        // Check if username is existed
         Employee employee = employeeRepository.findByUsername(employeeDTO.getUsername());
-        if (employee == null) {
-            employee = modelMapper.map(employeeDTO, Employee.class);
-            employee.setPassword("12345");
-        } else {
-            employee.setFirstname(employeeDTO.getFirstName());
-            employee.setLastname(employeeDTO.getLastName());
-            employee.setPhone(employeeDTO.getPhone());
-            employee.setBranch(employeeDTO.getBranch());
-            employee.setStatus(employeeDTO.getStatus());
-            employee.setRole(employeeDTO.getRole());
-        }
-        employee = employeeRepository.save(employee);
-        return modelMapper.map(employee, EmployeeDTO.class);
+        if (employee != null)
+            throw new EmployeeException("Duplicated username");
+        // Check if email is existed
+        employee = employeeRepository.findByEmail(employeeDTO.getEmail());
+        if (employee != null)
+            throw new EmployeeException("Duplicated email");
+        employee = modelMapper.map(employeeDTO, Employee.class);
+        employee.setPassword("12345");
+        return modelMapper.map(employeeRepository.save(employee), EmployeeDTO.class);
     }
 
-    public DeleteResponse delete(String username) {
+    public EmployeeDTO update(String username, EmployeeDTO employeeDTO) throws EntityNotFoundException {
+        // Check if username is existed
         Employee employee = employeeRepository.findByUsername(username);
         if (employee == null)
-            return new DeleteResponse(false, "Employee not found");
+            throw new EntityNotFoundException("Employee not found");
+        Employee newEmployee = modelMapper.map(employeeDTO, Employee.class);
+        newEmployee.setId(employee.getId());
+        newEmployee.setUsername(username);
+        newEmployee.setPassword(employee.getPassword());
+        newEmployee.setEmail(employee.getEmail());
+        return modelMapper.map(employeeRepository.save(newEmployee), EmployeeDTO.class);
+    }
+
+    public boolean delete(String username) throws EntityNotFoundException {
+        Employee employee = employeeRepository.findByUsername(username);
+        if (employee == null)
+            throw new EntityNotFoundException("Employee not found");
         employeeRepository.delete(employee);
-        employee = employeeRepository.findByUsername(username);
-        if (employee == null)
-            return new DeleteResponse(true, null);
-        else
-            return new DeleteResponse(false, "Unexpected error");
+        return true;
     }
 
-    public void changeStatus(String username) {
+    public boolean changeStatus(String username, int status) throws EntityNotFoundException {
         Employee employee = employeeRepository.findByUsername(username);
-        employee.setStatus(employee.getStatus() ^ 1);
+        if (employee == null)
+            throw new EntityNotFoundException("Employee not found");
+        employee.setStatus(status);
         employeeRepository.save(employee);
+        return true;
     }
 }

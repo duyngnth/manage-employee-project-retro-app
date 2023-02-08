@@ -21,7 +21,7 @@ public class Employee {
     private String branch;
     private int status;
     private String role;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Assignment> assignments;
 
