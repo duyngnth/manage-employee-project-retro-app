@@ -17,7 +17,7 @@ public class Project {
     private String name;
     private String description;
     private int status;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project", cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Assignment> assignments;
 }
