@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Assignment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "project_assignment_id")
+    @Column(name = "assignment_id")
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "employee_id")
