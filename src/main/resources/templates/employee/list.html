@@ -22,7 +22,7 @@
             console.log(data);
             show(data);
         }
-        let url = "http://localhost:8080/employee?";
+        let url = "http://localhost:8080/manage-epr-app/employees";
         let inputName = /*[[${inputName}]]*/ null;
         let projectCode = /*[[${projectCode}]]*/ null;
         if (inputName != null)
@@ -45,7 +45,7 @@
             </tr>`
             let index = 0;
 
-            for (let r of data) {
+            for (let r of data.result) {
                 index++;
                 let status;
                 if (r.status == 1)
