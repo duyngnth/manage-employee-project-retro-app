@@ -4,13 +4,11 @@ import asia.ncc.application.dto.EmployeeDTO;
 import asia.ncc.application.entity.Employee;
 import asia.ncc.application.exception.EmployeeException;
 import asia.ncc.application.exception.EntityNotFoundException;
-import asia.ncc.application.payload.ApplicationResponse;
 import asia.ncc.application.repository.EmployeeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.rmi.UnexpectedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +19,8 @@ public class EmployeeService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public EmployeeDTO get(String username) throws EntityNotFoundException {
-        Employee employee = employeeRepository.findByUsername(username);
+    public EmployeeDTO get(int id) throws EntityNotFoundException {
+        Employee employee = employeeRepository.findById(id).orElse(null);
         if (employee == null)
             throw new EntityNotFoundException("Employee not found");
         return modelMapper.map(employee, EmployeeDTO.class);
@@ -52,33 +50,32 @@ public class EmployeeService {
         return modelMapper.map(employeeRepository.save(employee), EmployeeDTO.class);
     }
 
-    public EmployeeDTO update(String username, EmployeeDTO employeeDTO) throws EntityNotFoundException {
+    public EmployeeDTO update(EmployeeDTO employeeDTO) throws EntityNotFoundException {
         // Check if username is existed
-        Employee employee = employeeRepository.findByUsername(username);
+        Employee employee = employeeRepository.findById(employeeDTO.getId()).orElse(null);
         if (employee == null)
             throw new EntityNotFoundException("Employee not found");
         Employee newEmployee = modelMapper.map(employeeDTO, Employee.class);
         newEmployee.setId(employee.getId());
-        newEmployee.setUsername(username);
+        newEmployee.setUsername(employee.getUsername());
         newEmployee.setPassword(employee.getPassword());
         newEmployee.setEmail(employee.getEmail());
         return modelMapper.map(employeeRepository.save(newEmployee), EmployeeDTO.class);
     }
 
-    public boolean delete(String username) throws EntityNotFoundException {
-        Employee employee = employeeRepository.findByUsername(username);
+    public boolean delete(int id) throws EntityNotFoundException {
+        Employee employee = employeeRepository.findById(id).orElse(null);
         if (employee == null)
             throw new EntityNotFoundException("Employee not found");
         employeeRepository.delete(employee);
         return true;
     }
 
-    public boolean changeStatus(String username, int status) throws EntityNotFoundException {
-        Employee employee = employeeRepository.findByUsername(username);
+    public EmployeeDTO changeStatus(int id, int status) throws EntityNotFoundException {
+        Employee employee = employeeRepository.findById(id).orElse(null);
         if (employee == null)
             throw new EntityNotFoundException("Employee not found");
         employee.setStatus(status);
-        employeeRepository.save(employee);
-        return true;
+        return modelMapper.map(employeeRepository.save(employee), EmployeeDTO.class);
     }
 }

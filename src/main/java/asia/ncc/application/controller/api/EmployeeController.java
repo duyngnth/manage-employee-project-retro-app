@@ -46,10 +46,10 @@ public class EmployeeController {
         return ResponseEntity.ok().body(employeeDTO);
     }
 
-    @GetMapping("employees/{username}")
-    public ApplicationResponse<EmployeeDTO> get(@PathVariable String username)
+    @GetMapping("employees/{id}")
+    public ApplicationResponse<EmployeeDTO> get(@PathVariable int id)
             throws EntityNotFoundException {
-        EmployeeDTO employeeDTO = employeeService.get(username);
+        EmployeeDTO employeeDTO = employeeService.get(id);
         return ApplicationResponse.succeed(employeeDTO);
     }
 
@@ -68,21 +68,21 @@ public class EmployeeController {
         return ApplicationResponse.succeed(employeeDTO);
     }
 
-    @PutMapping("employees/{username}")
-    public ApplicationResponse<EmployeeDTO> update(@PathVariable String username, @RequestBody EmployeeDTO employeeDTO)
+    @PutMapping("employees")
+    public ApplicationResponse<EmployeeDTO> update(@RequestBody EmployeeDTO employeeDTO)
             throws EntityNotFoundException {
-        employeeDTO = employeeService.update(username, employeeDTO);
+        employeeDTO = employeeService.update(employeeDTO);
         return ApplicationResponse.succeed(employeeDTO);
     }
 
-    @DeleteMapping("employees/{username}")
-    public ApplicationResponse delete(@PathVariable String username) throws EntityNotFoundException {
-        return new ApplicationResponse(null, employeeService.delete(username), null);
+    @DeleteMapping("employees/{id}")
+    public ApplicationResponse delete(@PathVariable int id) throws EntityNotFoundException {
+        return new ApplicationResponse(null, employeeService.delete(id), null);
     }
 
-    @PutMapping("employees/{username}/changeStatus/{status}")
-    public ApplicationResponse changeStatus(@PathVariable String username, @PathVariable int status)
+    @PutMapping("employees/{id}/status/{status}")
+    public ApplicationResponse<EmployeeDTO> changeStatus(@PathVariable int id, @PathVariable int status)
             throws EntityNotFoundException {
-        return new ApplicationResponse(null, employeeService.changeStatus(username, status), null);
+        return ApplicationResponse.succeed(employeeService.changeStatus(id, status));
     }
 }

@@ -19,8 +19,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     @Query(value = "SELECT * FROM employee \n" +
             "WHERE ((:input_name IS NULL\n" +
             "OR username LIKE :input_name\n" +
-            "OR CONCAT(firstname, ' ', lastname) LIKE :input_name \n" +
-            "OR CONCAT(lastname, ' ', firstname) LIKE :input_name))\n" +
+            "OR CONCAT(first_name, ' ', last_name) LIKE :input_name \n" +
+            "OR CONCAT(last_name, ' ', first_name) LIKE :input_name))\n" +
             "AND (:project_code IS NULL\n" +
             "OR employee_id IN \n" +
             "(SELECT employee_id FROM assignment \n" +

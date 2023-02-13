@@ -34,14 +34,14 @@ public class AssignmentController {
         return ApplicationResponse.succeed(assignmentService.list(projectId));
     }
 
-    @PutMapping("assignments/role/change")
+    @PutMapping("assignments/role")
     public ApplicationResponse<ResponseAssignmentDTO> changeStatus(
             @RequestBody RequestAssignmentDTO assignmentDTO
     ) throws EntityNotFoundException {
         return ApplicationResponse.succeed(assignmentService.changeRole(assignmentDTO));
     }
 
-    @DeleteMapping("assignments/{id}")
+    @DeleteMapping("assignments")
     public ApplicationResponse delete(@RequestBody RequestAssignmentDTO assignmentDTO)
             throws EntityNotFoundException {
         return new ApplicationResponse(null, assignmentService.delete(assignmentDTO), null);

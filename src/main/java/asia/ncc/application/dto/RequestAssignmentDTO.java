@@ -7,5 +7,5 @@ public class RequestAssignmentDTO {
     private Integer id;
     private int employeeId;
     private int projectId;
-    private int projectRoleId;
+    private Integer projectRoleId;
 }

@@ -56,12 +56,17 @@ public class AssignmentService {
     }
 
     public ResponseAssignmentDTO add(RequestAssignmentDTO assignmentDTO) throws AssignmentException {
-        if (!assignmentRepository.existsByEmployeeIdAndProjectId(
+        if (assignmentRepository.existsByEmployeeIdAndProjectId(
                 assignmentDTO.getEmployeeId(),
                 assignmentDTO.getProjectId()
         ))
             throw new AssignmentException("Duplicated assignment");
-        Assignment assignment = modelMapper.map(assignmentDTO, Assignment.class);
+        if (assignmentDTO.getProjectRoleId() == null)
+            assignmentDTO.setProjectRoleId(2);
+        else
+            if (!projectRoleRepository.findById(assignmentDTO.getProjectRoleId()).isPresent())
+                throw new AssignmentException("Invalid project role");
+        Assignment assignment = toEntity(assignmentDTO);
         return modelMapper.map(assignmentRepository.save(assignment), ResponseAssignmentDTO.class);
     }
 

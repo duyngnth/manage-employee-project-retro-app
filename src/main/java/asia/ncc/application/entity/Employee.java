@@ -14,8 +14,8 @@ public class Employee {
     private Integer id;
     private String username;
     private String password;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String email;
     private String phone;
     private String branch;
@@ -24,8 +24,4 @@ public class Employee {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Assignment> assignments;
-
-    public String getFullname() {
-        return lastname + " " + firstname;
-    }
 }
