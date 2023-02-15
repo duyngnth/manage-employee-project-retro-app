@@ -26,15 +26,15 @@ public class EmployeeService {
         return modelMapper.map(employee, EmployeeDTO.class);
     }
 
-    public List<EmployeeDTO> filter(String projectCode, String inputName) {
-        if (inputName != null)
-            inputName = "%" + inputName + "%";
-        List<Employee> filterResults = employeeRepository.filter(projectCode, inputName);
-        List<EmployeeDTO> employeeDTOs = new ArrayList<>();
-        for (Employee employee : filterResults)
-            employeeDTOs.add(modelMapper.map(employee, EmployeeDTO.class));
-        return employeeDTOs;
-    }
+//    public List<EmployeeDTO> filter(String projectCode, String inputName) {
+//        if (inputName != null)
+//            inputName = "%" + inputName + "%";
+//        List<Employee> filterResults = employeeRepository.filter(projectCode, inputName);
+//        List<EmployeeDTO> employeeDTOs = new ArrayList<>();
+//        for (Employee employee : filterResults)
+//            employeeDTOs.add(modelMapper.map(employee, EmployeeDTO.class));
+//        return employeeDTOs;
+//    }
 
     public EmployeeDTO add(EmployeeDTO employeeDTO) throws EmployeeException {
         // Check if username is existed

@@ -1,5 +1,6 @@
 package asia.ncc.application.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
 
@@ -19,5 +20,6 @@ public class ScoreCriteria {
     private int weight;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "scoreCriteria")
     @ToString.Exclude
+    @JsonIgnore
     List<EvaluationScore> scoreList;
 }

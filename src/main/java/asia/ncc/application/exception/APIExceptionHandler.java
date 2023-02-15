@@ -18,7 +18,12 @@ public class APIExceptionHandler {
         return new ApplicationResponse(null, false, e.getMessage());
     }
 
-    @ExceptionHandler({EmployeeException.class, ProjectException.class, AssignmentException.class})
+    @ExceptionHandler({
+            EmployeeException.class,
+            ProjectException.class,
+            AssignmentException.class,
+            EvaluationException.class
+    })
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ApplicationResponse handleEntityException(Exception e, WebRequest request) {
         return new ApplicationResponse(null, false, e.getMessage());

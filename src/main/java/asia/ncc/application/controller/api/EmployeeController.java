@@ -53,13 +53,13 @@ public class EmployeeController {
         return ApplicationResponse.succeed(employeeDTO);
     }
 
-    @GetMapping("employees")
-    public ApplicationResponse<List<EmployeeDTO>> filter(
-            @RequestParam(value = "projectCode", required = false) String projectCode,
-            @RequestParam(value = "inputName", required = false) String inputName) {
-        List<EmployeeDTO> filterResult = employeeService.filter(projectCode, inputName);
-        return ApplicationResponse.succeed(filterResult);
-    }
+//    @GetMapping("employees")
+//    public ApplicationResponse<List<EmployeeDTO>> filter(
+//            @RequestParam(value = "projectCode", required = false) String projectCode,
+//            @RequestParam(value = "inputName", required = false) String inputName) {
+//        List<EmployeeDTO> filterResult = employeeService.filter(projectCode, inputName);
+//        return ApplicationResponse.succeed(filterResult);
+//    }
 
     @PostMapping("employees")
     public ApplicationResponse<EmployeeDTO> add(@RequestBody EmployeeDTO employeeDTO)

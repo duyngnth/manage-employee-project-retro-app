@@ -1,10 +1,10 @@
 package asia.ncc.application.entity;
 
 import lombok.Data;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -24,7 +24,7 @@ public class Evaluation {
     @JoinColumn(name = "project_id")
     private Project project;
     private String comment;
-    private Timestamp timestamp;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "evaluation")
+    private LocalDateTime timestamp;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "evaluation", cascade = CascadeType.PERSIST)
     private List<EvaluationScore> scoreList;
 }
