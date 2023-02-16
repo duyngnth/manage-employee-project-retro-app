@@ -9,7 +9,9 @@ import asia.ncc.application.exception.EvaluationScoreException;
 import asia.ncc.application.payload.ApplicationResponse;
 import asia.ncc.application.repository.EvaluationRepository;
 import asia.ncc.application.service.EvaluationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +20,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/evaluations")
+@RequiredArgsConstructor
 public class EvaluationController {
     @Autowired
     private EvaluationService evaluationService;
+    @Value("${page.size.default}")
+    private final int DEFAULT_PAGE_SIZE;
 
     @GetMapping("/{id}")
     public ApplicationResponse<ResponseEvaluationDTO> get(@PathVariable int id)
@@ -33,8 +38,10 @@ public class EvaluationController {
             @RequestParam(value = "evaluatorId", required = false) Integer evaluatorId,
             @RequestParam(value = "evaluateeId", required = false) Integer evaluateeId,
             @RequestParam(value = "pageIndex", required = false, defaultValue = "0") int pageIndex,
-            @RequestParam(value = "pageSize", required = false, defaultValue = "20") int pageSize
+            @RequestParam(value = "pageSize", required = false) Integer pageSize
     ) {
+        if (pageSize == null)
+            pageSize = DEFAULT_PAGE_SIZE;
         Pageable pageable = PageRequest.of(pageIndex, pageSize);
         return ApplicationResponse.succeed(evaluationService.filter(evaluatorId, evaluateeId, pageable));
     }

@@ -7,6 +7,7 @@ import asia.ncc.application.exception.ProjectException;
 import asia.ncc.application.repository.ProjectRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,8 +28,8 @@ public class ProjectService {
         return modelMapper.map(project, ProjectDTO.class);
     }
 
-    public List<ProjectDTO> list() {
-        List<Project> projects = projectRepository.findAll();
+    public List<ProjectDTO> list(Pageable pageable) {
+        List<Project> projects = projectRepository.findAll(pageable).toList();
         List<ProjectDTO> projectDTOs = new ArrayList<>();
         for (Project project : projects)
             projectDTOs.add(modelMapper.map(project, ProjectDTO.class));

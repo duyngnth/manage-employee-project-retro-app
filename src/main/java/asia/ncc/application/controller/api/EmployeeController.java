@@ -5,7 +5,9 @@ import asia.ncc.application.exception.EmployeeException;
 import asia.ncc.application.exception.EntityNotFoundException;
 import asia.ncc.application.payload.ApplicationResponse;
 import asia.ncc.application.service.EmployeeService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -17,9 +19,12 @@ import java.util.Random;
 
 @RestController
 @RequestMapping("api/employees")
+@RequiredArgsConstructor
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
+    @Value("${page.size.default}")
+    private final int DEFAULT_PAGE_SIZE;
 
     @PostMapping("/fetch")
     public ResponseEntity fetch(@RequestBody EmployeeDTO employeeDTO) {
@@ -61,7 +66,9 @@ public class EmployeeController {
             @RequestParam(value = "projectCode", required = false) String projectCode,
             @RequestParam(value = "inputName", required = false) String inputName,
             @RequestParam(value = "pageIndex", required = false, defaultValue = "0") int pageIndex,
-            @RequestParam(value = "pageSize", required = false, defaultValue = "20") int pageSize) {
+            @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+        if (pageSize == null)
+            pageSize = DEFAULT_PAGE_SIZE;
         Pageable pageable = PageRequest.of(pageIndex, pageSize);
         List<EmployeeDTO> filterResult = employeeService.filter(projectCode, inputName, pageable);
         return ApplicationResponse.succeed(filterResult);

@@ -11,6 +11,7 @@ import asia.ncc.application.repository.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -137,8 +138,8 @@ public class EvaluationService {
         return modelMapper.map(findById(id), ResponseEvaluationDTO.class);
     }
 
-    public List<ResponseEvaluationDTO> filter(Integer evaluatorId, Integer evaluateeId) {
-        List<Evaluation> evaluations = evaluationRepository.filter(evaluatorId, evaluateeId);
+    public List<ResponseEvaluationDTO> filter(Integer evaluatorId, Integer evaluateeId, Pageable pageable) {
+        List<Evaluation> evaluations = evaluationRepository.filter(evaluatorId, evaluateeId, pageable);
         return evaluations.stream()
                 .map(e -> modelMapper.map(e, ResponseEvaluationDTO.class))
                 .collect(Collectors.toList());
