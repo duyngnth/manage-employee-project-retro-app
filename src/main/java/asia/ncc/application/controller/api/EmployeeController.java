@@ -6,6 +6,8 @@ import asia.ncc.application.exception.EntityNotFoundException;
 import asia.ncc.application.payload.ApplicationResponse;
 import asia.ncc.application.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +16,12 @@ import java.util.List;
 import java.util.Random;
 
 @RestController
+@RequestMapping("api/employees")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @PostMapping("employee/fetch")
+    @PostMapping("/fetch")
     public ResponseEntity fetch(@RequestBody EmployeeDTO employeeDTO) {
         Random rd = new Random();
 
@@ -46,41 +49,44 @@ public class EmployeeController {
         return ResponseEntity.ok().body(employeeDTO);
     }
 
-    @GetMapping("employees/{id}")
+    @GetMapping("/{id}")
     public ApplicationResponse<EmployeeDTO> get(@PathVariable int id)
             throws EntityNotFoundException {
         EmployeeDTO employeeDTO = employeeService.get(id);
         return ApplicationResponse.succeed(employeeDTO);
     }
 
-//    @GetMapping("employees")
-//    public ApplicationResponse<List<EmployeeDTO>> filter(
-//            @RequestParam(value = "projectCode", required = false) String projectCode,
-//            @RequestParam(value = "inputName", required = false) String inputName) {
-//        List<EmployeeDTO> filterResult = employeeService.filter(projectCode, inputName);
-//        return ApplicationResponse.succeed(filterResult);
-//    }
+    @GetMapping
+    public ApplicationResponse<List<EmployeeDTO>> filter(
+            @RequestParam(value = "projectCode", required = false) String projectCode,
+            @RequestParam(value = "inputName", required = false) String inputName,
+            @RequestParam(value = "pageIndex", required = false, defaultValue = "0") int pageIndex,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "20") int pageSize) {
+        Pageable pageable = PageRequest.of(pageIndex, pageSize);
+        List<EmployeeDTO> filterResult = employeeService.filter(projectCode, inputName, pageable);
+        return ApplicationResponse.succeed(filterResult);
+    }
 
-    @PostMapping("employees")
+    @PostMapping
     public ApplicationResponse<EmployeeDTO> add(@RequestBody EmployeeDTO employeeDTO)
             throws EmployeeException {
         employeeDTO = employeeService.add(employeeDTO);
         return ApplicationResponse.succeed(employeeDTO);
     }
 
-    @PutMapping("employees")
+    @PutMapping
     public ApplicationResponse<EmployeeDTO> update(@RequestBody EmployeeDTO employeeDTO)
             throws EntityNotFoundException {
         employeeDTO = employeeService.update(employeeDTO);
         return ApplicationResponse.succeed(employeeDTO);
     }
 
-    @DeleteMapping("employees/{id}")
+    @DeleteMapping("/{id}")
     public ApplicationResponse delete(@PathVariable int id) throws EntityNotFoundException {
         return new ApplicationResponse(null, employeeService.delete(id), null);
     }
 
-    @PutMapping("employees/{id}/status/{status}")
+    @PutMapping("/{id}/status/{status}")
     public ApplicationResponse<EmployeeDTO> changeStatus(@PathVariable int id, @PathVariable int status)
             throws EntityNotFoundException {
         return ApplicationResponse.succeed(employeeService.changeStatus(id, status));
